@@ -8,7 +8,7 @@
 
 ### Setup
 ```
-cp .env.example .env
+cp .env-example .env
 ```
 
 Build the containers:
