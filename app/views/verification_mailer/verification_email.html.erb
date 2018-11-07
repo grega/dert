@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <p>A request has been made to perform the following action on your account:</p>
+    <p>To confirm this, please click on the following link:</p>
+    <p><a href="<%= @url %>"><%= @url %></a></p>
+
+    <p>You can safely ignore and delete this email if you do not want to take this action.</p>
+
+    <p>Regards,</p>
+    <p><%= @email_from %></p>
+    <p><a href="<%= @web_address %>"><%= @web_address %></a></p>
+  </body>
+</html>
