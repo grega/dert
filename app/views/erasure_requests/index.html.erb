@@ -1,0 +1,17 @@
+<h1>Erasure Requests</h1> <%= link_to 'New request', new_erasure_request_path %>
+ 
+<table>
+  <tr>
+    <th>Email</th>
+    <th>Verified</th>
+    <th></th>
+  </tr>
+ 
+  <% @erasure_requests.each do |request| %>
+    <tr>
+      <td><%= request.email %> </td>
+      <td><%= request.verified %> <%= link_to 'Verify', verify_path(:token => request.verify_token) %></td>
+      <td><%= link_to 'Show', erasure_request_path(request) %></td>
+    </tr>
+  <% end %>
+</table>
