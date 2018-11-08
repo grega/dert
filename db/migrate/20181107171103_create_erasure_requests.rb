@@ -5,6 +5,7 @@ class CreateErasureRequests < ActiveRecord::Migration[5.2]
       t.string :email
       t.string :verify_token
       t.datetime :verified_at
+      t.datetime :completed_at
 
       t.timestamps
     end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_07_171103) do
+ActiveRecord::Schema.define(version: 2018_11_07_225240) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -20,6 +20,23 @@ ActiveRecord::Schema.define(version: 2018_11_07_171103) do
     t.string "email"
     t.string "verify_token"
     t.datetime "verified_at"
+    t.datetime "completed_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "erasure_requests_properties", id: false, force: :cascade do |t|
+    t.uuid "erasure_request_id"
+    t.uuid "property_id"
+    t.index ["erasure_request_id"], name: "index_erasure_requests_properties_on_erasure_request_id"
+    t.index ["property_id"], name: "index_erasure_requests_properties_on_property_id"
+  end
+
+  create_table "properties", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "name"
+    t.text "notes"
+    t.string "url"
+    t.boolean "completed_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
