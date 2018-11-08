@@ -1,0 +1,21 @@
+<%= link_to 'Erasure Requests', erasure_requests_path %>
+
+<h1>Properties</h1> <%= link_to 'New property', new_property_path %>
+ 
+<table>
+  <tr>
+    <th>Name</th>
+    <th>URL</th>
+    <th>Notes</th>
+    <th></th>
+  </tr>
+ 
+  <% @properties.each do |property| %>
+    <tr>
+      <td><%= property.name %> </td>
+      <td><%= property.url %></td>
+      <td><%= property.notes %></td>
+      <td><%= link_to 'Show', property_path(property) %></td>
+    </tr>
+  <% end %>
+</table>
