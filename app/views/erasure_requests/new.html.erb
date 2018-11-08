@@ -4,13 +4,8 @@
   <div class="alert alert-<%= key %>"><%= value %></div>
 <% end %>
 
-<%= form_with scope: :erasure_request, url: erasure_requests_path, local: true do |form| %>
-  <p>
-    <%= form.label :email %><br>
-    <%= form.text_field :email %>
-  </p>
- 
-  <p>
-    <%= form.submit %>
-  </p>
+<%= simple_form_for @erasure_request do |f| %>
+  <%= f.input :email %>
+  <%= f.association :properties, as: :check_boxes, :input_html => { :checked => true } %>
+  <%= f.button :submit %>
 <% end %>
