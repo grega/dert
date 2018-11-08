@@ -1,4 +1,10 @@
+<%= link_to 'Back to all erasure requests', erasure_requests_path %>
+
 <p>
   <strong>Email:</strong>
   <%= @erasure_request.email %>
 </p>
+
+<% @erasure_request.properties.each do |property| %>
+  <%= property.name %>
+<% end %>
