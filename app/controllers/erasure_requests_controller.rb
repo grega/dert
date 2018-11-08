@@ -8,6 +8,7 @@ class ErasureRequestsController < ApplicationController
   end
 
 	def new
+    @erasure_request = ErasureRequest.new
   end
 
   def create
@@ -31,6 +32,6 @@ class ErasureRequestsController < ApplicationController
 
   private
     def erasure_request_params
-      params.require(:erasure_request).permit(:email, :verify_token)
+      params.require(:erasure_request).permit(:email, :verify_token, property_ids: [])
     end
 end
