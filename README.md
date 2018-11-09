@@ -1,4 +1,4 @@
-# Union - a club management platform
+# Dert
 
 ## Development
 
