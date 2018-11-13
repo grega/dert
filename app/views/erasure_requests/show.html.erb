@@ -5,6 +5,7 @@
   <%= @erasure_request.email %>
 </p>
 
-<% @erasure_request.properties.each do |property| %>
-  <%= property.name %>
+<% @erasure_request.removal_actions.each do |removal_action| %>
+  <%= removal_action.property.name %>
+  <%= removal_action.completed %>
 <% end %>
