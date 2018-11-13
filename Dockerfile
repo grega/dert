@@ -1,6 +1,12 @@
-FROM ruby:2.5
+FROM ruby:2.5-alpine
 
-RUN apt-get update -qq && apt-get install -y build-essential libpq-dev nodejs
+RUN apk add --update \
+  build-base \
+  libxml2-dev \
+  libxslt-dev \
+  postgresql-dev \
+  tzdata \
+  nodejs
 
 RUN mkdir /app
 WORKDIR /app
