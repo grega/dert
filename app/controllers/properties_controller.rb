@@ -3,11 +3,16 @@ class PropertiesController < ApplicationController
     @properties = Property.all
   end
 
+	def new
+    @property = Property.new
+  end
+
   def show
     @property = Property.find(params[:id])
   end
 
-	def new
+  def edit
+    @property = Property.find(params[:id])
   end
 
   def create
@@ -18,6 +23,16 @@ class PropertiesController < ApplicationController
     else
       flash.now[:danger] = "Error saving property, please try again"
       render :new
+    end
+  end
+
+  def update
+    @property = Property.find(params[:id])
+   
+    if @property.update(property_params)
+      redirect_to @property
+    else
+      render 'edit'
     end
   end
 
