@@ -1,40 +1,56 @@
-<h1 class="title is-2">Erasure Requests</h1>
-
-<h2 class="title is-3">Edit Request</h2>
-
-<% flash.each do |key, value| %>
-  <div class="alert alert-<%= key %>"><%= value %></div>
-<% end %>
-
-<%= simple_form_for @erasure_request do |f| %>
-  <div class="form-group">
-    <%= f.input :email %>
+<div class="container my-5">
+  <div class="row">
+    <div class="col-12">
+      <h1>Edit Request</h1>
+    </div>
   </div>
-  <% if @erasure_request.verified %>
-    <table>
-      <thead>
-        <tr>
-          <th>Property</th>
-          <th>Notes</th>
-          <th>Completed</th>
-        </tr>
-      </thead>
-      <tbody>
-      <%= f.simple_fields_for :removal_actions do |r| %>
-        <tr>
-          <td><%= r.object.property.name %></td>
-          <td><%= r.input :notes %></td>
-          <td><%= r.input :completed, :as => :boolean, :label => false %></td>
-        </tr>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-6">
+    <% flash.each do |key, value| %>
+      <div class="alert alert-<%= key %>"><%= value %></div>
+    <% end %>
+    </div>
+  </div>
+
+  <%= simple_form_for @erasure_request do |f| %>
+  <div class="row">
+    <div class="col-6">
+      <div class="form-group">
+        <%= f.input :email %>
+      </div>
+    </div>
+
+    <div class="col-12 my-3">
+    <% if @erasure_request.verified %>
+      <h2>Actions</h2>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Property</th>
+            <th>Notes</th>
+            <th>Completed</th>
+          </tr>
+        </thead>
+        <tbody>
+        <%= f.simple_fields_for :removal_actions do |r| %>
+          <tr>
+            <td><%= r.object.property.name %></td>
+            <td><%= r.input :notes, :label => false %></td>
+            <td><abbr title="<%= r.object.completed_at %>"><%= r.input :completed, :as => :boolean, :label => false %></abbr></td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+      <% else %>
+        <p><i>Actions not shown; erasure request must be verified before it can be actioned</i></p>
       <% end %>
-      </tbody>
-    </table>
-  <% else %>
-    <p>Erasure request must be verified before it can be actioned</p>
+      <%= f.association :properties, as: :check_boxes %>
+      <div class="form-group">
+        <%= f.button :submit, { :class => 'btn-primary' } %>
+      </div>
+    </div>
   <% end %>
-  <div class="form-group">
-    <%= f.button :submit, { :class => 'btn-primary' } %>
-  </div>
-<% end %>
- 
-<%= link_to 'Back', erasure_requests_path %>
+</div>

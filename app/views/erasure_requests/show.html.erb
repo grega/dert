@@ -1,11 +1,39 @@
-<%= link_to 'Back to all erasure requests', erasure_requests_path %>
+<div class="container my-5">
+  <div class="row">
+    <div class="col-10">
+      <h1>Request Details</h1>
+    </div>
+    <div class="col-2">
+      <%= link_to 'Edit request', edit_erasure_request_path(@erasure_request.id), { :class => 'btn btn-primary' } %>
+    </div>
+  </div>
+</div>
 
-<p>
-  <strong>Email:</strong>
-  <%= @erasure_request.email %>
-</p>
-
-<% @erasure_request.removal_actions.each do |removal_action| %>
-  <%= removal_action.property.name %>
-  <%= removal_action.completed %>
-<% end %>
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <p><strong>Email:</strong> <%= @erasure_request.email %></p>
+      <p><strong>Fulfilled:</strong> <%= @erasure_request.fulfilled? %></p>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Property Name</th>
+            <th>Notes</th>
+            <th>Completed</th>
+            <th>Completed At</th>
+          </tr>
+        </thead>
+        <tbody>
+        <% @erasure_request.removal_actions.each do |removal_action| %>
+          <tr>
+            <td><%= removal_action.property.name %></td>
+            <td><%= removal_action.notes %>
+            <td class="<%= removal_action.completed ? 'text-success' : 'text-danger' %>"><%= removal_action.completed %></td>
+            <td><%= removal_action.completed_at %>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

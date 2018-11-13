@@ -1,24 +1,33 @@
-<h1 class="title is-2">Properties</h1>
+<div class="container my-5">
+  <div class="row">
+    <div class="col-10">
+      <h1>Properties</h1>
+    </div>
+    <div class="col-2">
+      <%= link_to 'New property', new_property_path, { :class => 'btn btn-primary' } %>
+    </div>
+  </div>
+</div>
 
-<%= link_to 'New property', new_property_path, { :class => 'button is-primary' } %>
- 
-<table class="table">
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>URL</th>
-      <th>Notes</th>
-      <th>Actions</th>
-    </tr>
-  </thead>
-  <tbody>
-  <% @properties.each do |property| %>
-    <tr>
-      <td><%= link_to property.name, property_path(property) %></td>
-      <td><%= link_to property.url, property.url %></td>
-      <td><%= property.notes %></td>
-      <td><%= link_to 'Edit', edit_property_path(property) %></td>
-    </tr>
-  <% end %>
-  </tbody>
-</table>
+<div class="container">
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">URL</th>
+        <th scope="col">Notes</th>
+        <th scope="col">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+    <% @properties.each do |property| %>
+      <tr>
+        <td><%= link_to property.name, property_path(property) %></td>
+        <td><%= link_to property.url, property.url %></td>
+        <td><%= property.notes %></td>
+        <td><%= link_to 'Edit', edit_property_path(property) %></td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>
