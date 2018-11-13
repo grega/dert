@@ -4,7 +4,6 @@ class CreateProperties < ActiveRecord::Migration[5.2]
       t.string :name
       t.text :notes
       t.string :url
-      t.boolean :completed_at
 
       t.timestamps
     end
