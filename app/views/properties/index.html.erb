@@ -1,21 +1,24 @@
-<%= link_to 'Erasure Requests', erasure_requests_path %>
+<h1 class="title is-2">Properties</h1>
 
-<h1>Properties</h1> <%= link_to 'New property', new_property_path %>
+<%= link_to 'New property', new_property_path, { :class => 'button is-primary' } %>
  
-<table>
-  <tr>
-    <th>Name</th>
-    <th>URL</th>
-    <th>Notes</th>
-    <th></th>
-  </tr>
- 
+<table class="table">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>URL</th>
+      <th>Notes</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
   <% @properties.each do |property| %>
     <tr>
-      <td><%= property.name %> </td>
-      <td><%= property.url %></td>
+      <td><%= link_to property.name, property_path(property) %></td>
+      <td><%= link_to property.url, property.url %></td>
       <td><%= property.notes %></td>
-      <td><%= link_to 'Show', property_path(property) %></td>
+      <td><%= link_to 'Edit', edit_property_path(property) %></td>
     </tr>
   <% end %>
+  </tbody>
 </table>

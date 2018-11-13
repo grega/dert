@@ -1,21 +1,25 @@
-<%= link_to 'Properties', properties_path %>
+<h1 class="title is-2">Erasure Requests</h1>
 
-<h1>Erasure Requests</h1> <%= link_to 'New request', new_erasure_request_path %>
+<%= link_to 'New request', new_erasure_request_path, { :class => 'button is-primary' } %>
  
-<table>
-  <tr>
-    <th>Email</th>
-    <th>Verified</th>
-    <th></th>
-    <th></th>
-  </tr>
- 
+<table class="table">
+  <thead>
+    <tr>
+      <th>Email</th>
+      <th>Verified</th>
+      <th>Verify Link</th>
+      <th>Actions</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
   <% @erasure_requests.each do |request| %>
     <tr>
-      <td><%= request.email %> </td>
-      <td><%= request.verified %> <%= link_to 'Verify', verify_path(:token => request.verify_token) %></td>
-      <td><%= link_to 'Show', erasure_request_path(request) %></td>
+      <td><%= link_to request.email, erasure_request_path(request) %></td>
+      <td><%= request.verified %></td>
+      <td><%= link_to 'Verify', verify_path(:token => request.verify_token) %></td>
       <td><%= link_to 'Edit', edit_erasure_request_path(request) %></td>
     </tr>
   <% end %>
+  </tbody>
 </table>
