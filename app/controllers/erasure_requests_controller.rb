@@ -20,13 +20,9 @@ class ErasureRequestsController < ApplicationController
     @erasure_request.verify_token = SecureRandom.urlsafe_base64.to_s
 
     if @erasure_request.save
-      # create a removal_action for each property
       erasure_request_params[:property_ids].each do |property_id|
-        removal_action_params = { :erasure_request_id => @erasure_request.id, :property_id => property_id }
-        removal_action = @erasure_request.removal_actions.create(removal_action_params)
-        removal_action.save
+        create_removal_action(@erasure_request, property_id)
       end
-      # send verification email
       VerificationMailer.with(erasure_request: @erasure_request).verification_email.deliver_now
       redirect_to @erasure_request
     else
@@ -39,6 +35,11 @@ class ErasureRequestsController < ApplicationController
     @erasure_request = ErasureRequest.find(params[:id])
    
     if @erasure_request.update(erasure_request_params)
+      erasure_request_params[:property_ids].each do |property_id|
+        unless @erasure_request.removal_actions.where(:property_id => property_id).exists?
+          create_removal_action(@erasure_request, property_id)
+        end
+      end
       redirect_to @erasure_request
     else
       render 'edit'
@@ -48,11 +49,18 @@ class ErasureRequestsController < ApplicationController
   def verify
     erasure_request = ErasureRequest.find_by_verify_token(params[:token])
     erasure_request.verified = true
+    erasure_request.verify_token = ''
     erasure_request.save
   end
 
   private
     def erasure_request_params
       params.require(:erasure_request).permit(:email, :verify_token, property_ids: [], removal_actions_attributes: [:id, :completed, :notes])
+    end
+
+    def create_removal_action(erasure_request, property_id)
+      removal_action_params = { :erasure_request_id => erasure_request.id, :property_id => property_id }
+      removal_action = erasure_request.removal_actions.create(removal_action_params)
+      removal_action.save
     end
 end
