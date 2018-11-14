@@ -26,7 +26,7 @@ class ErasureRequestsController < ApplicationController
       VerificationMailer.with(erasure_request: @erasure_request).verification_email.deliver_now
       redirect_to @erasure_request
     else
-      flash.now[:danger] = "Email already exists, please try again"
+      flash.now[:danger] = "Error saving erasure request, please try again"
       render :new
     end
   end
