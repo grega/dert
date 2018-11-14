@@ -23,7 +23,7 @@ docker-compose up
 
 Visit http://localhost:3000
 
-### Install new Dependencies
+### Install new dependencies
 
 Add the dependency to the Gemfile and run:
 ```
@@ -35,16 +35,23 @@ Followed by:
 docker-compose build
 ```
 
-### Create Database
+### Database
+
+Create:
 ```
 docker-compose run web bin/rails db:create
 ```
 
-### Run migrations
+Migrations:
 
 After adding any new migrations they need to be run inside docker:
 ```
 docker-compose run web bin/rails db:migrate
+```
+
+Seed:
+```
+docker-compose run web bin/rails db:seed
 ```
 
 ## Testing
