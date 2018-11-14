@@ -1,6 +1,6 @@
 FROM ruby:2.5-alpine
 
-RUN apk add --update \
+RUN apk --no-cache --update add \
   build-base \
   libxml2-dev \
   libxslt-dev \
