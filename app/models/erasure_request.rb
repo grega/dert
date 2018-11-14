@@ -3,7 +3,7 @@ class ErasureRequest < ApplicationRecord
   has_many :removal_actions, dependent: :destroy
 
   accepts_nested_attributes_for :removal_actions
-  
+	
 	time_for_a_boolean :verified
 	
 	validates :email,  presence: true, format: { with: /\A.+@.+$\Z/ }, uniqueness: true
