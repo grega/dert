@@ -23,7 +23,11 @@
     <% @erasure_requests.each do |request| %>
       <tr>
         <td><%= link_to request.email, erasure_request_path(request) %></td>
-        <td class="<%= request.verified ? 'text-success' : 'text-danger' %>"><%= request.verified %></td>
+        <% if request.verified %>
+          <td class="text-success">true</td>
+        <% else %>
+          <td><%= link_to 'Manually Verify', verify_erasure_request_url(:token => request.verify_token) %></td>
+        <% end %>
         <td class="<%= request.fulfilled? ? 'text-success' : 'text-danger' %>"><%= request.fulfilled? ? request.fulfilled? : "#{request.fulfilled?} (#{request.percent_fulfilled}%)" %></td>
         <td><%= link_to 'Edit', edit_erasure_request_path(request) %></td>
       </tr>

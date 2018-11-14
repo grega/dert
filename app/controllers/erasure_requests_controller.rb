@@ -46,13 +46,6 @@ class ErasureRequestsController < ApplicationController
     end
   end
 
-  def verify
-    erasure_request = ErasureRequest.find_by_verify_token(params[:token])
-    erasure_request.verified = true
-    erasure_request.verify_token = ''
-    erasure_request.save
-  end
-
   private
     def erasure_request_params
       params.require(:erasure_request).permit(:email, :verify_token, property_ids: [], removal_actions_attributes: [:id, :completed, :notes])
