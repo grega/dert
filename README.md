@@ -43,8 +43,6 @@ docker-compose run web bin/rails db:create
 ```
 
 Migrations:
-
-After adding any new migrations they need to be run inside docker:
 ```
 docker-compose run web bin/rails db:migrate
 ```
