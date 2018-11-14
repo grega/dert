@@ -16,7 +16,8 @@
         <th scope="col">Name</th>
         <th scope="col">URL</th>
         <th scope="col">Notes</th>
-        <th scope="col">Actions</th>
+        <th scope="col"></th>
+        <th scope="col"></th>
       </tr>
     </thead>
     <tbody>
@@ -26,6 +27,7 @@
         <td><%= link_to property.url, property.url %></td>
         <td><%= property.notes %></td>
         <td><%= link_to 'Edit', edit_property_path(property) %></td>
+        <td><%= link_to 'Delete', property_path(property), method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
     </tbody>

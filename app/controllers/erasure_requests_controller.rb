@@ -46,6 +46,13 @@ class ErasureRequestsController < ApplicationController
     end
   end
 
+  def destroy
+    @erasure_request = ErasureRequest.find(params[:id])
+    @erasure_request.destroy
+
+    redirect_to erasure_requests_path
+  end
+
   private
     def erasure_request_params
       params.require(:erasure_request).permit(:email, :verify_token, property_ids: [], removal_actions_attributes: [:id, :completed, :notes])
