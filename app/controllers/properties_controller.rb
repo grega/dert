@@ -3,7 +3,7 @@ class PropertiesController < ApplicationController
     @properties = Property.all
   end
 
-	def new
+  def new
     @property = Property.new
   end
 
