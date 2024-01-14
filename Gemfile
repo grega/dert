@@ -7,7 +7,7 @@ gem 'bootsnap', '>= 1.1.0', require: false
 gem 'bootstrap', '4.3.1'
 gem 'coffee-rails', '~> 4.2'
 gem 'cloudflare-rails', '~> 0.4.0'
-gem 'jquery-rails', '~> 4.3'
+gem 'jquery-rails', '~> 4.4'
 gem 'pg', '>= 0.18', '< 2.0'
 gem 'puma', '~> 3.12'
 gem 'rack-attack', '~> 5.4.2'
